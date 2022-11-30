@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style.css">
+    <!-- Icons -->
+    <link rel="shortcut icon" href="src/favicon.png" type="image/png">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <script defer src="app/player.js"></script>
+    <title>Vplayer</title>
+</head>
+<body>
+    <!-- test this color theme clr="#ff256e" in vplayer attributes -->
+    <vplayer > <!-- <= Here -->
+        <video src="src/bigbuckbunny.mp4"></video>
+        <init>
+            <button Lskip dur="5"><i class="fi fi-sr-rewind"></i></button>
+            <button play class="actvInitBtns loading"><i id="favicon" class="fi fi-sr-play"></i></button>
+            <button Rskip dur="5"><i class="fi fi-sr-forward"></i></button>
+        </init>
+        <controles>
+            <input video-progress type="range" value="0"  min="0" max="100">
+            <ctrlbar>
+                <div>
+                    <button playpause><i class="fi fi-sr-play"></i></button>
+                    <volume>
+                        <button volmute><i class="fi fi-sr-volume"></i></button>
+                        <input volume type="range" min="0" max="100" value="0">
+                    </volume>
+                    <h5><span crntdur>00:00</span> / <span fulldur>--:--</span></h5>
+                </div>
+                <div>
+                    <button speed><i class="fi fi-rr-tachometer-average"></i></button>
+                    <button picinpic><i class="fi fi-rr-resize"></i></button>
+                    <button fullscreen><i class="fi fi-sr-expand"></i></button>
+                </div>
+            </ctrlbar>
+        </controles>
+    </vplayer>
+</body>
+</html>

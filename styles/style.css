@@ -1,0 +1,313 @@
+body {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #141414;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+:root {
+    --clr: #2589ff;
+    --clr2: #ff256e;
+    --bg-op: #4e4d4d80;
+    --bg-drk: #0f0f0faf;
+    --bg-hvr: #81818169;
+}
+
+i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+    height: 3px;
+    background: var(--bg-op);
+    border-radius: 5px;
+    background-image: linear-gradient(to right, var(--clr), var(--clr));
+    background-size: 0% 100%;
+    background-repeat: no-repeat;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 10px;
+    width: 10px;
+    opacity: 0;
+    transform: scale(0);
+    border-radius: 50%;
+    background: white !important;
+    transition: all .2s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+input[type="range"]:is(:hover, :focus)::-webkit-slider-thumb {
+    opacity: 1;
+    transform: scale(1);
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    appearance: none;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+}
+
+vplayer {
+    position: relative;
+    height: 50vh;
+    aspect-ratio: 16/9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    box-shadow: 0 0 8px 2px var(--clr);
+    overflow: hidden;
+}
+
+vplayer video {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+vplayer init {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 130px;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+init button {
+    position: relative;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    opacity: 0;
+    transform: scale(0);
+    background-color: var(--bg-op);
+    transition: all .4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+init button.actvInitBtns {
+    animation: actvbtns .2s cubic-bezier(0.23, 1, 0.320, 1) .2s forwards;
+}
+
+@keyframes actvbtns {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+init button:nth-child(odd) {
+    height: 70px;
+    width: 70px;
+
+    font-size: 2rem;
+}
+
+init button:nth-child(2) {
+    height: 100px;
+    width: 100px;
+    font-size: 3.2rem;
+    transform: scale(1);
+    transition: all .3s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+init button:nth-child(2).loading {
+    animation: fadebg 2s ease-in-out infinite;
+}
+
+init button:nth-child(2).loading::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    background-color: #acacacbb;
+    z-index: -2;
+    animation: fadegrow 2s ease-in-out infinite;
+}
+
+/* whene done loading the video add this class */
+init button.loadDone {
+    background-color: var(--clr);
+}
+
+init button:hover {
+    background-color: var(--bg-hvr);
+}
+
+init button:nth-child(2):active {
+    transform: scale(.8);
+}
+
+@keyframes fadegrow {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(.8);
+    }
+}
+
+@keyframes fadebg {
+    0% {
+        background-color: var(--bg-op);
+    }
+
+    50% {
+        background-color: var(--clr);
+    }
+
+    100% {
+        background-color: var(--bg-op);
+    }
+}
+
+vplayer controles {
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    opacity: 0;
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: inset 0 -20px 18px 10px var(--bg-drk);
+    transition: all .3s cubic-bezier(0.19, 1, 0.22, 1);
+    /* background-color: rgba(222, 184, 135, 0.274); */
+}
+
+/* activate the controles */
+controles.activeControles {
+    opacity: 1;
+    bottom: 0;
+}
+
+controles input:first-child {
+    width: 95%;
+}
+
+controles ctrlbar {
+    width: 95%;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ctrlbar button {
+    position: relative;
+    border: none;
+    outline: none;
+    height: 35px;
+    width: 35px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    color: white;
+    background: none;
+    transition: all .2s ease-in-out;
+}
+
+ctrlbar button:is(:hover, :focus){
+    color: var(--clr);
+}
+
+ctrlbar div {
+    position: relative;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+ctrlbar div:first-child volume{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+volume {
+    gap: 8px;
+}
+
+volume button{
+    z-index: 2;
+}
+
+volume button.mute::before {
+    position: absolute;
+    content: '';
+    top: 50%;
+    left: 50%;
+    height: 0%;
+    width: 2.5px;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    border-radius: 8px;
+    background-color: white;
+    transition: all .2s ease-in-out;
+    animation: mute .2s ease-in-out .2s forwards;
+}
+
+@keyframes mute {
+    to {
+        height: 95%;
+    }
+}
+
+volume button:is(:hover, :focus)::before {
+    background-color: var(--clr);
+}
+
+volume input {
+    height: 4px !important;
+    width: 70px !important;
+}
+
+ctrlbar button[settings] i {
+    transition: all .3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+ctrlbar button[settings].settingsSpin i {
+    transform: rotate(90deg);
+}
+
